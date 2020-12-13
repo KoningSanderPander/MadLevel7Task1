@@ -15,18 +15,12 @@ class ProfileFragment : Fragment() {
 
     private val profileViewModel: ProfileViewModel by activityViewModels()
 
-    companion object {
-        const val GALLERY_REQUEST_CODE = 100
-    }
-
-    private var profileImageUri: Uri? = null
-
     private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
