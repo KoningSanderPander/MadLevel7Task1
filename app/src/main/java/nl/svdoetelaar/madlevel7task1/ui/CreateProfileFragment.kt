@@ -8,9 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
+import nl.svdoetelaar.madlevel7task1.R
 import nl.svdoetelaar.madlevel7task1.databinding.FragmentCreateProfileBinding
+import nl.svdoetelaar.madlevel7task1.models.Profile
+import nl.svdoetelaar.madlevel7task1.viewmodels.ProfileViewModel
 
 class CreateProfileFragment : Fragment() {
+
+    private val profileViewModel: ProfileViewModel by activityViewModels()
 
     companion object {
         const val GALLERY_REQUEST_CODE = 100
@@ -19,6 +27,7 @@ class CreateProfileFragment : Fragment() {
     private var profileImageUri: Uri? = null
 
     private lateinit var binding: FragmentCreateProfileBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +64,38 @@ class CreateProfileFragment : Fragment() {
     }
 
     private fun onConfirmClick() {
-        TODO("Not yet implemented")
+        profileViewModel.createProfile(
+            Profile(
+                binding.etFirstName.text.ifNullOrEmpty(""),
+                binding.etLastName.text.ifNullOrEmpty(""),
+                binding.etProfileDescription.text.ifNullOrEmpty(""),
+                profileImageUri.ifNullOrEmpty()
+            )
+        )
+
+        observeProfileCreation()
+
+        findNavController().navigate(R.id.action_createProfileFragment_to_profileFragment)
     }
 
+    private fun CharSequence?.ifNullOrEmpty(default: String) =
+        if (this.isNullOrEmpty()) default else this.toString()
+
+    private fun Uri?.ifNullOrEmpty() = this.toString()
+
+    private fun observeProfileCreation() {
+        profileViewModel.createSucces.observe(viewLifecycleOwner, {
+            Snackbar.make(
+                requireView(),
+                getText(R.string.successfully_created_profile),
+                Snackbar.LENGTH_SHORT
+            ).show()
+
+            findNavController().popBackStack()
+        })
+
+        profileViewModel.errorText.observe(viewLifecycleOwner, {
+            Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+        })
+    }
 }

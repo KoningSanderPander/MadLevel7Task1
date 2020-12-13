@@ -9,5 +9,18 @@
         android:id="@+id/createProfileFragment"
         android:name="nl.svdoetelaar.madlevel7task1.ui.CreateProfileFragment"
         android:label="fragment_create_profile"
-        tools:layout="@layout/fragment_create_profile" />
+        tools:layout="@layout/fragment_create_profile" >
+        <action
+            android:id="@+id/action_createProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="nl.svdoetelaar.madlevel7task1.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_createProfileFragment"
+            app:destination="@id/createProfileFragment" />
+    </fragment>
 </navigation>
