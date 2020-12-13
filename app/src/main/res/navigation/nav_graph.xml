@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/createProfileFragment"
-        android:name="nl.svdoetelaar.madlevel7task1.CreateProfileFragment"
+        android:name="nl.svdoetelaar.madlevel7task1.ui.CreateProfileFragment"
         android:label="fragment_create_profile"
         tools:layout="@layout/fragment_create_profile" />
 </navigation>
