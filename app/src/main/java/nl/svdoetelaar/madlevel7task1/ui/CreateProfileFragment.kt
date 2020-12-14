@@ -84,7 +84,7 @@ class CreateProfileFragment : Fragment() {
     private fun Uri?.ifNullOrEmpty() = this.toString()
 
     private fun observeProfileCreation() {
-        profileViewModel.createSucces.observe(viewLifecycleOwner, {
+        profileViewModel.createSuccess.observe(viewLifecycleOwner, {
             Snackbar.make(
                 requireView(),
                 getText(R.string.successfully_created_profile),

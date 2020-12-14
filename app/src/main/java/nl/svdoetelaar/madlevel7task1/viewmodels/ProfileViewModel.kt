@@ -15,7 +15,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     private val profileRepository = ProfileRepository()
 
     val profile = profileRepository.profile
-    val createSucces = profileRepository.createSuccess
+    val createSuccess = profileRepository.createSuccess
 
     private val _errorText: MutableLiveData<String> = MutableLiveData()
     val errorText: LiveData<String> get() = _errorText

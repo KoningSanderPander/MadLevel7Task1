@@ -43,7 +43,7 @@ class ProfileRepository {
 
     suspend fun createProfile(profile: Profile) {
         try {
-            withTimeout(5_000) {
+            withTimeout(5_000L) {
                 profileDocument
                     .set(profile)
                     .await()
